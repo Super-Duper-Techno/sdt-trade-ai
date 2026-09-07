@@ -1,0 +1,11 @@
+{
+  "capital": 5000,
+  "risk_per_trade_pct": 5.0,
+  "max_daily_loss_pct": 10.0,
+  "max_consecutive_losses": 3,
+  "max_trades_per_day": 3,
+  "min_ai_confidence": 70,
+  "min_risk_reward": 2.0,
+  "max_position_value_pct": 80.0,
+  "tradingsymbols": ["IDEA", "YESBANK"]
+}
