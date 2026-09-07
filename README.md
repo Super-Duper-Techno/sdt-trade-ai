@@ -1,15 +1,12 @@
 # SDT Trade AI — One-Click Trading Dashboard
 
-# SDT Trade AI — One-Click Trading Dashboard
-
 > **SUPER DUPER TECHNO — SDT Trade AI**
 
-[![Buy Me a Coffee](https://img.shields.io/badge/Support-Buy%20Me%20a%20Coffee-ffdd00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/superdupertechno)
+[
 
-A local web dashboard for the SDT trading rulebook, connected to
-[Zerodha Kite Connect](https://developers.kite.trade/).
+![Buy Me a Coffee](https://img.shields.io/badge/Support-Buy%20Me%20a%20Coffee-ffdd00?style=flat&logo=buy-me-a-coffee&logoColor=black)
 
-> **SUPER DUPER TECHNO — SDT Trade AI**
+](https://www.buymeacoffee.com/superdupertechno)
 
 A local web dashboard for the SDT trading rulebook, connected to
 [Zerodha Kite Connect](https://developers.kite.trade/).
@@ -55,7 +52,7 @@ required.
 
 ## 🧭 Project Status
 
-**Current version:** `0.1.0`  
+**Current version:** `0.1.0`
 **Status:** Experimental / Initial Public Release
 
 SDT Trade AI currently includes:
