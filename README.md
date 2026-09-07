@@ -1,101 +1,114 @@
-# SDT Trade AI — one-click dashboard edition
+# SDT Trade AI — One-Click Trading Dashboard
 
-A local web dashboard for the SDT trading rulebook, wired to Zerodha Kite
-Connect. Runs identically on Windows, Mac, and Linux because it's just
-Python + your browser — no native installers, no OS-specific builds.
+> **SUPER DUPER TECHNO — SDT Trade AI**
 
-```
-MARKET DATA → FEATURE ENGINE → AI SIGNAL ENGINE → ENTRY RULE ENGINE →
-RISK ENGINE → EXECUTION ENGINE → BROKER → POSITION MONITORING → AUTO-EXIT
-```
+A local web dashboard for the SDT trading rulebook, connected to
+[Zerodha Kite Connect](https://developers.kite.trade/).
 
-## Quick start
+SDT Trade AI combines market data, feature analysis, signal generation,
+entry rules, risk management, execution, position monitoring, and
+automated exits into a single local dashboard.
 
-**Windows** — double-click `run_windows.bat`
-**Mac** — first time only: right-click `run_mac.command` → Open (macOS
-blocks unsigned scripts on the first launch). After that, double-click it.
-**Linux** — `chmod +x run_linux.sh` once, then double-click it, or run
-`./run_linux.sh` in a terminal.
+It is designed to run on **Windows, macOS, and Linux** using Python and
+a web browser. No native installer or OS-specific application build is
+required.
 
-Each script creates a virtual environment, installs dependencies, and opens
-`http://127.0.0.1:5000` in your browser automatically. First run takes
-30–60 seconds to install; after that it's instant.
+---
 
-## Before the dashboard is useful
+> [!WARNING]
+> ## ⚠️ Financial Risk
+>
+> **SDT Trade AI is experimental trading software.**
+>
+> The software can be configured to place real financial orders through
+> Zerodha Kite Connect when Paper mode is disabled.
+>
+> **Paper mode is enabled by default.**
+>
+> Do not disable Paper mode until you have thoroughly tested the system,
+> understand its behavior, and deliberately accept the risks of placing
+> real orders.
+>
+> Trading involves the risk of financial loss. No profit, return, or
+> performance is guaranteed.
+>
+> Market conditions, volatility, liquidity, slippage, network failures,
+> broker outages, rejected orders, incorrect configuration, software
+> bugs, and other unexpected conditions can result in losses.
+>
+> **Never trade money you cannot afford to lose.**
+>
+> SDT Trade AI is provided for experimental, educational, and
+> technological purposes. It is not financial, investment, or trading
+> advice.
 
-1. Create a Kite Connect app at https://developers.kite.trade (₹500/month
-   subscription, separate from your regular Zerodha account).
-2. `cp .env.example .env` and fill in `KITE_API_KEY` / `KITE_API_SECRET`.
-3. Launch the app — the dashboard opens on a **Connect to Kite** screen.
-   Click "Open Kite Login", log in with your Zerodha credentials, copy the
-   `request_token` from the redirect URL, paste it back, click Connect.
-   (Kite requires this once every trading day — there's no way around it
-   without storing your Zerodha password, which this deliberately doesn't do.)
+---
 
-## What ships configured for a ₹5,000 test run
+## 🧭 Project Status
 
-`config.json` defaults to:
+**Current version:** `0.1.0`  
+**Status:** Experimental / Initial Public Release
 
-- **Capital: ₹5,000**
-- Risk per trade: 5% (₹250) — the rulebook's own 0.25–0.5% default produces
-  a near-zero position size at ₹5,000 against most stock prices, so this
-  is bumped up specifically to make test trades actually happen. Treat
-  this as a functional-testing setting, not a recommended live one.
-- Max daily loss: 10% (₹500)
-- Max 3 trades/day, max 3 consecutive losses
-- Instruments: IDEA, YESBANK — low-priced, liquid NSE stocks, chosen so a
-  ₹5,000 account can actually take a meaningful position size in them
+SDT Trade AI currently includes:
 
-All of this is editable from the dashboard's Configuration panel — just
-stop the engine first (config can't change mid-session).
+- ✅ Local web dashboard
+- ✅ Zerodha Kite Connect integration
+- ✅ Paper trading mode
+- ✅ Live market-data integration
+- ✅ Feature engine
+- ✅ AI signal engine
+- ✅ Entry rule engine
+- ✅ Risk engine
+- ✅ Execution engine
+- ✅ Position monitoring
+- ✅ Automated exit logic
+- ✅ GTT safety backstop
+- ✅ Session statistics
+- ✅ Trade logging
+- ✅ Kill switch
+- ✅ Configuration dashboard
+- ✅ Automated test suite
+- ✅ Mocked Kite client tests
+- ✅ Windows launcher
+- ✅ macOS launcher
+- ✅ Linux launcher
 
-## Paper mode — on by default
+### What this status means
 
-The dashboard's **Paper mode** toggle is ON by default. In paper mode the
-engine uses real Kite market data but places zero real orders — fills are
-simulated. Flip it off only when you've watched paper trades behave the
-way you expect and are deliberately ready to place real orders with real
-money. There's no confirmation dialog beyond the toggle itself, so treat
-that switch with the seriousness it deserves.
+The project is functional and its tested components have automated
+coverage.
 
-## The dashboard
+However, **passing automated tests does not mean that live trading is
+guaranteed to be safe or profitable**.
 
-- **Live prices** for each configured instrument, with regime tags
-  (trending up/down, ranging, high volatility)
-- **Final Decision Engine** — the entry waterfall lighting up green/pass or
-  red/fail in real time, same as the rulebook's Section 28
-- **Open position card** with live unrealized P&L and R-multiple
-- **Session stats** — daily P&L, trades today, consecutive losses, all
-  against your configured limits
-- **Start / Stop / Reset Day / Kill Switch** controls
-- **Trade log** of everything closed this session
+The test suite uses a mocked Kite client and therefore does not reproduce
+every condition of a real broker connection or real financial market.
 
-## Architecture (unchanged from the CLI version)
+Live broker behavior, order execution, slippage, network conditions,
+broker-side rejection, market volatility, and other real-world
+conditions require separate validation.
 
-| File | Role |
-|---|---|
-| `app.py` | Flask server — dashboard + control API |
-| `engine_runtime.py` | runs the pipeline in a background thread, publishes state |
-| `paper_execution.py` | simulated fills for paper mode — real market data, no real orders |
-| `config.py`, `auth.py`, `market_data.py`, `signal_engine.py`, `rule_engine.py`, `risk_engine.py`, `execution.py`, `position_monitor.py`, `gtt_safety.py`, `logger_store.py` | same engine as before — see RUNBOOK.md for the section-by-section mapping |
-| `main.py` | still here as a terminal-only alternative if you don't want the dashboard |
+---
 
-## Tests
+# 📊 System Pipeline
 
-```
-pip install pytest
-python -m pytest tests/ -v
-```
+SDT Trade AI follows the complete trading pipeline:
 
-34 tests, run against a mocked Kite client, verifying the risk math, the
-entry waterfall's every reject path, exit logic in both directions, and
-the GTT backstop — with no live account needed. This is what "working"
-means for the parts I can actually verify from here; the live broker
-round-trip is the one thing only you can test, which is exactly what
-paper mode exists to de-risk.
-
-## Golden rule
-
-> Protect capital first. Profit comes second. If the system is not sure,
-> do nothing. A missed trade costs nothing. An uncontrolled trade can cost
-> the account.
+```text
+MARKET DATA
+     ↓
+FEATURE ENGINE
+     ↓
+AI SIGNAL ENGINE
+     ↓
+ENTRY RULE ENGINE
+     ↓
+RISK ENGINE
+     ↓
+EXECUTION ENGINE
+     ↓
+BROKER
+     ↓
+POSITION MONITORING
+     ↓
+AUTO-EXIT
